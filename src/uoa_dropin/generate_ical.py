@@ -1,4 +1,5 @@
 import icalendar
+import pytz
 
 def generate_ical(events):
 
@@ -7,6 +8,9 @@ def generate_ical(events):
     for event in events:
 
         ical_event = icalendar.Event()
+
+        event['start'] = event['start'].astimezone(pytz.timezone('America/Edmonton'))
+        event['end'] = event['end'].astimezone(pytz.timezone('America/Edmonton'))
 
         ical_event.add('summary', event['name'])
         ical_event.add('dtstart', event['start'])
